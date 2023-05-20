@@ -294,7 +294,7 @@ global.db.data.chats[from].mute = false
 conn.sendMessage(from, { text: `*[❗] Este chat ha sido desmuteado (desbaneado) correctamente, ahora el Bot responderá con normalidad*` }, { quoted: msg });    
 break          
 case 'play':
-if (!textoo) return conn.sendMessage(from, { text: `*[❗] Nombre de la canción faltante, por favor ingrese el comando mas el nombre, titulo o enlace de alguna canción o video de YouTube*\n\n*—◉ Ejemplo:*\n*◉ ${prefix + command} Good Feeling - Flo Rida*` }, { quoted: msg });     
+if (!textoo) return conn.sendMessage(from, { text: `*┊↳☢️┊ Nombre de la canción faltante, por favor ingrese el comando mas el nombre, titulo o enlace de alguna canción o video de YouTube*\n\n*-Ejemplo:*\n*◉ ${prefix + command}, { quoted: msg });    
 let res = await fetch(`https://api.lolhuman.xyz/api/ytplay2?apikey=BrunoSobrino&query=${textoo}`) 
 let json = await res.json()
 let kingcore = await ytplay(textoo)
@@ -403,10 +403,10 @@ break
 /* [❗]                      [❗]                      [❗] */
 /*-------------------------------------------------------*/  
 case 'chatgpt': case 'ia': 
-if (!textoo) return conn.sendMessage(from, { text: `*[❗] Ingrese una petición o una orden para usar la funcion ChatGPT*\n\n*—◉ Ejemplos de peticions u ordenes:*\n*◉ ${prefix + command} Reflexion sobre la serie Merlina 2022 de netflix*\n*◉ ${prefix + command} Codigo en JS para un juego de cartas*` }, { quoted: msg });    
+if (!textoo) return conn.sendMessage(from, { text: `*┊↳☢️┊ Ingresa una pregunta o orden para la Inteligencia Artificial*\n\n* Ejemplos de peticions u ordenes:*\n*◉ ${prefix + command} Escribe una reflexion sobre el manga de Naruto*` }, { quoted: msg });    
 try {    
 let chgptdb = global.chatgpt.data.users[senderJid];
-let textoModo = `Actuaras como un Bot de WhatsApp y tu lenguaje principal es español, tu seras openai-botwa y fuiste creado por BrunoSobrino. Si te piden tus comandos, menu o lo que puedes hacer y/o tus funciones le mandas lo siguiente:\n\n*COMANDOS DISPONIBLES*\n\n🔷 *Generales*\n\`\`\`- #menu\n- #mute\n- #unmute\n- #ping\n- #runtime\`\`\`\n\n🤖 *IA*\n\`\`\`- #chatgpt\n- #chatgpt2\n- #delchatgpt\n- #dall-e\`\`\`\n\n📥 *Multimedia*\n\`\`\`- #play\n- #play2\n- #ytmp3\n- #ytmp4\n- #sticker\n- #mediafiredl\`\`\`\n\n💫 *Grupos*\n\`\`\`- #hidetag\n- #promote\n- #demote\n- #kick\`\`\`\n\n🤴🏻 *Owner*\n\`\`\`- #update\n- #desactivarwa\n- #restrict enable\n- #restrict disable\`\`\`\n\nSi te piden hacer algo que este en tu menu pero no lo hacen correctamente muestrales como con un ejemplo\n\nSi te piden un tutorial para hacer o instalar un Bot o algo relacion con tu instalacion o obetenerte para un grupo le recomiendas este canal https://www.youtube.com/@TheShadowBrokers-TEAM y si te piden tu script o source le das el video mas el link de tu repositorio que es este: https://github.com/BrunoSobrino/openai-botwa`  
+let textoModo = `Actuaras como un Bot de WhatsApp y tu lenguaje principal es español, tu seras ToxiBot-IA y fuiste creado por ToxiPan. Si te piden tus comandos, menu o lo que puedes hacer y/o tus funciones le mandas lo siguiente:\n\n*COMANDOS DISPONIBLES*\n\n🔷 *Generales*\n\`\`\`- #menu\n- #mute\n- #unmute\n- #ping\n- #runtime\`\`\`\n\n🤖 *IA*\n\`\`\`- #chatgpt\n- #chatgpt2\n- #delchatgpt\n- #dall-e\`\`\`\n\n📥 *Multimedia*\n\`\`\`- #play\n- #play2\n- #ytmp3\n- #ytmp4\n- #sticker\n- #mediafiredl\`\`\`\n\n💫 *Grupos*\n\`\`\`- #hidetag\n- #promote\n- #demote\n- #kick\`\`\`\n\n🤴🏻 *Owner*\n\`\`\`- #update\n- #desactivarwa\n- #restrict enable\n- #restrict disable\`\`\`\n\nSi te piden hacer algo que este en tu menu pero no lo hacen correctamente muestrales como con un ejemplo\n\nSi te piden un tutorial para hacer o instalar un Bot o algo relacion con tu instalacion o obetenerte para un grupo le recomiendas este canal https://www.youtube.com/@TheShadowBrokers-TEAM y si te piden tu script o source le das el video mas el link de tu repositorio que es este: https://github.com/BrunoSobrino/openai-botwa`  
 chgptdb.push({ role: 'user', content: textoo });
 const config = { method: 'post', url: 'https://api.openai.com/v1/chat/completions', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + OPENAI_KEY }, data: JSON.stringify({ 'model': 'gpt-3.5-turbo', 'messages': [{ role: 'system', content: textoModo }, ...chgptdb ]})}
 let response = await axios(config);
@@ -437,14 +437,14 @@ break
 case 'delchatgpt':
 try {
 delete global.chatgpt.data.users[senderJid]  
-conn.sendMessage(from, { text: `*[❗] Se elimino con exito el historial de mensajes entre usted y ChatGPT (IA)*\n\n*—◉ Recuerde que puede ultilizar este comando cuando tenga algun error en el comando ${prefix}chatgpt O ${prefix}ia*` }, { quoted: msg });  
+conn.sendMessage(from, { text: `*┊↳☢️┊ Se elimino con exito el historial de mensajes entre usted y ToxiBot-AI (IA)*\n\n*- Recuerde que puede ultilizar este comando cuando tenga algun error en el comando ${prefix}chatgpt O ${prefix}ia*` }, { quoted: msg });  
 } catch (error1) {   
 console.log(error1)
-conn.sendMessage(from, { text: `*[❗] Error, vuelva a intentarlo*` }, { quoted: msg });  
+conn.sendMessage(from, { text: `*┊↳☢️┊ Error, vuelva a intentarlo!*` }, { quoted: msg });  
 }   
 break    
 case 'chatgpt2': case 'ia2':      
-if (!textoo) return reply(`*[❗] Ingrese una petición o una orden para usar la funcion ChatGPT*\n\n*—◉ Ejemplos de peticions u ordenes:*\n*◉ ${prefix + command} Reflexion sobre la serie Merlina 2022 de netflix*\n*◉ ${prefix + command} Codigo en JS para un juego de cartas*`)           
+if (!textoo) return reply(`**┊↳☢️┊ Ingresa una pregunta o orden para la Inteligencia Artificial*\n\n* Ejemplos de peticions u ordenes:*\n*◉ ${prefix + command} Escribe una reflexion sobre el manga de Naruto*`)           
 try {
 let IA2 = await fetch(`https://api.amosayomide05.cf/gpt/?question=${textoo}&string_id=${senderJid}`)  
 let IAR2 = await IA2.json()
@@ -464,12 +464,12 @@ let tioress = await fetch(`https://api.lolhuman.xyz/api/openai?apikey=BrunoSobri
 let hasill = await tioress.json()
 reply(`${hasill.result}`.trim())   
 } catch (qqe) {        
-reply("*[❗] Error, no se obtuvieron respuestas de la IA...*\n\n*—◉ Error:*\n" + qqe)  
+reply("*┊↳☢️┊ Error, no se obtuvieron respuestas de la IA...*\n\n*- Error:*\n" + qqe)  
 }}}}
 break       
 case 'sticker': case 's':
 try {        
-const pname = 'OpenAI - WaBot'
+const pname = 'ToxiBot - AI - Stickers'
 const athor = '+' + conn.user.id.split(":")[0];
 if (isImage || isQuotedImage) {
 await conn.downloadAndSaveMediaMessage(msg, "image", `./tmp/${sender.split("@")[0]}.jpeg`)
@@ -538,7 +538,7 @@ let tiores = await fetch(`https://api.lolhuman.xyz/api/openai?apikey=BrunoSobrin
 let hasil = await tiores.json()
 reply(`${hasil.result}`.trim())   
 } catch (eeee) {        
-reply("*[❗] Error, no se obtuvieron respuestas de la IA...*\n\n*—◉ Error:*\n" + eeee)  
+reply("*┊↳☢️┊ Error, no se obtuvieron respuestas de la IA...*\n\n*—◉ Error:*\n" + eeee)  
 }}}}}
 break
 }} catch (err) {
