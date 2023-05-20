@@ -105,50 +105,49 @@ conn.sendPresenceUpdate("available", from);
 
 switch (command) {
 case 'start': case 'menu':
-var textReply = `Hola @${senderJid.split`@`[0] || pushname || 'user'} 👋
+var textReply = `✎ Hola @${senderJid.split`@`[0] || pushname || 'user'} 👋
 
-Soy un Bot de WhatsApp que usa la inteligencia artificial de OpenAI (ChatGPT), fui creado para responder a tus preguntas. Envíame una pregunta y te responderé!. 
+✎ Soy un Bot de WhatsApp con inteligencia artificial, fui creado para responder a tus preguntas. Envíame una pregunta y te responderé!. 
+NOTA: _El Bot se limita a responder ${MAX_TOKEN} palabras como máximo_
+═══════════════════════
+*COMANDOS DISPONIBLES* 
 
-_El Bot se limita a responder ${MAX_TOKEN} palabras como máximo_
-
-<------------------------------------------->
-
-*COMANDOS DISPONIBLES*
-
-🔷 *Generales*
+═══════════════════════
+☢️ *Generales*
 \`\`\`- ${prefix}menu
 - ${prefix}mute
 - ${prefix}unmute
 - ${prefix}ping
 - ${prefix}runtime\`\`\`
-
-🤖 *IA*
-\`\`\`- ${prefix}chatgpt
-- ${prefix}chatgpt2
+═══════════════════════
+🤖 *IA Chatbot*
+\`\`\`- ${prefix}ia
+- ${prefix}ia2
 - ${prefix}delchatgpt
 - ${prefix}dall-e\`\`\`
-
-📥 *Multimedia*
+═══════════════════════
+🎞️ *Multimedia*
 \`\`\`- ${prefix}play
 - ${prefix}play2
 - ${prefix}ytmp3
 - ${prefix}ytmp4
 - ${prefix}sticker
 - ${prefix}mediafiredl\`\`\`
-
+═══════════════════════
 💫 *Grupos*
 \`\`\`- ${prefix}hidetag
 - ${prefix}promote
 - ${prefix}demote
 - ${prefix}kick\`\`\`
-
+═══════════════════════
 🤴🏻 *Owner*
 \`\`\`- ${prefix}update
 - ${prefix}desactivarwa
 - ${prefix}restrict enable
 - ${prefix}restrict disable\`\`\`
-
-*Editado By @5219996125657*`
+═══════════════════════
+Cualquiern duda contacto: wa.me/50557418454
+*TOXIPAIN OFC*`
 if (msg.isGroup) {
 conn.sendMessage(from, { text: textReply, mentions: [...textReply.matchAll(/@([0-9]{5,16}|0)/g)].map(v => v[1] + '@s.whatsapp.net')}, { quoted: msg });    
 } else {
@@ -157,8 +156,8 @@ conn.sendMessage(from, { text: textReply, mentions: [...textReply.matchAll(/@([0
 }
 break
 case 'restrict':
-if (!isOwner) return conn.sendMessage(from, { text: `*[❗] Este comando solo puede ser utilizado por el Owner del Bot*` }, { quoted: msg });        
-if (!textoo) return conn.sendMessage(from, { text: `*[❗] Por favor usa una de las siguientes opciones:*\n*—◉ ${prefix}restrict enable*\n*—◉ ${prefix}restrict disable*` }, { quoted: msg });        
+if (!isOwner) return conn.sendMessage(from, { text: `*┊↳☢️┊ Este comando solo puede ser utilizado por el Owner del Bot*` }, { quoted: msg });        
+if (!textoo) return conn.sendMessage(from, { text: `*┊↳☢️┊ Por avor usa una de las siguientes opciones:*\n*— ${prefix}restrict enable*\n*— ${prefix}restrict disable*` }, { quoted: msg });        
 let bott = global.db.data.settings[conn.user.id] || {}            
 if (textoo == 'enable') {
 bott.restrict = true
@@ -167,14 +166,14 @@ conn.sendMessage(from, { text: `*[ ✔ ] Se activaron correctamente las restricc
 bott.restrict = false    
 conn.sendMessage(from, { text: `*[ ✔ ] Se desactivaron correctamente las restricciones del Bot, ahora el Bot tiene restricciones*` }, { quoted: msg });     
 } else {
-conn.sendMessage(from, { text: `*[❗] Por favor usa una de las siguientes opciones:*\n*—◉ ${prefix}restrict enable*\n*—◉ ${prefix}restrict disable*` }, { quoted: msg })}   
+conn.sendMessage(from, { text: `*┊↳☢️┊ Por favor usa una de las siguientes opciones:*\n*—◉ ${prefix}restrict enable*\n*—◉ ${prefix}restrict disable*` }, { quoted: msg })}   
 break            
 case 'runtime':   
 conn.sendMessage(from, { text: `*${require('../lib/myfunc').runtime(process.uptime())}*` }, { quoted: msg });    
 break
 case 'hidetag':
-if (!msg.isGroup) return conn.sendMessage(from, { text: `*[❗] Este comando solo puede ser usado en grupos*` }, { quoted: msg }) 
-if (!isAdmin) return conn.sendMessage(from, { text: `*[❗] Este comando solo puede ser usado por admins del grupo*` }, { quoted: msg })    
+if (!msg.isGroup) return conn.sendMessage(from, { text: `*┊↳☢️┊ Este comando solo puede ser usado en grupos*` }, { quoted: msg }) 
+if (!isAdmin) return conn.sendMessage(from, { text: `*┊↳☢️┊ Este comando solo puede ser usado por admins del grupo*` }, { quoted: msg })    
 try {
 let users = participants.map(u => u.id).filter(id => id);
 let htextos = `${textoo ? textoo : ''}`
@@ -201,15 +200,15 @@ fs.unlinkSync(`./tmp/${senderJid.split("@")[0]}.jpg`)
 } else {
 await conn.sendMessage(from, { text : `${htextos}`, mentions: users }, { quoted: msg })}
 } catch {
-conn.sendMessage(from, { text: `*[❗] Para usar este comando debe agregar un texto o responder a una imagen o video*` }, { quoted: msg })}    
+conn.sendMessage(from, { text: `*┊↳☢️┊ Para usar este comando debe agregar un texto o responder a una imagen o video*` }, { quoted: msg })}    
 break 
 case 'kick':        
-if (!restrictTOF) return conn.sendMessage(from, { text: `*[❗] El Owner tiene restringido (${prefix}restrict enable/disable) el uso de este comando*`}, { quoted: msg });        
-if (!msg.isGroup) return conn.sendMessage(from, { text: `*[❗] Este comando solo puede ser usado en grupos*`}, { quoted: msg }) 
-if (!isBotAdmin) return conn.sendMessage(from, { text: `*[❗] Para usar este comando, el Bot debe ser admin*`}, { quoted: msg })          
-if (!isAdmin) return conn.sendMessage(from, { text: `*[❗] Este comando solo puede ser usado por admins del grupo*`}, { quoted: msg })                               
+if (!restrictTOF) return conn.sendMessage(from, { text: `*┊↳☢️┊ El Owner tiene restringido (${prefix}restrict enable/disable) el uso de este comando*`}, { quoted: msg });        
+if (!msg.isGroup) return conn.sendMessage(from, { text: `*┊↳☢️┊ Este comando solo puede ser usado en grupos*`}, { quoted: msg }) 
+if (!isBotAdmin) return conn.sendMessage(from, { text: `*┊↳☢️┊ Para usar este comando, el Bot debe ser admin*`}, { quoted: msg })          
+if (!isAdmin) return conn.sendMessage(from, { text: `*┊↳☢️┊ Este comando solo puede ser usado por admins del grupo*`}, { quoted: msg })                               
 let iuserK = `${msg.quotedMsg ? msg.quotedMsg.key.participant || '' : ''}${msg.mentioned ? msg.mentioned : ''}`      
-if (!iuserK) return conn.sendMessage(from, { text: `*[❗] Uso correcto del comando:*\n*┯┷*\n*┠≽ ${prefix}kick @${senderJid.split`@`[0] || 'tag'}*\n*┠≽ ${prefix}kick -> responder a un mensaje*\n*┷┯*`, mentions: [senderJid]}, { quoted: msg });                     
+if (!iuserK) return conn.sendMessage(from, { text: `*┊↳☢️┊ Uso correcto del comando:*\n*┯┷*\n*┠≽ ${prefix}kick @${senderJid.split`@`[0] || 'tag'}*\n*┠≽ ${prefix}kick -> responder a un mensaje*\n*┷┯*`, mentions: [senderJid]}, { quoted: msg });                     
 try {
 var userrrK = '';
 if (msg.quotedMsg && msg.quotedMsg.key && msg.quotedMsg.key.participant) {
@@ -220,25 +219,25 @@ userrrK = msg.mentioned[0];
 console.log(e);
 } finally {
 if (userrrK) {
-if(conn.user.id.includes(userrrK)) return conn.sendMessage(from, { text: `*[❗] No puedo eliminarme a mi mismo, si desea eliminarme hagalo manualmente*`, mentions: [userrrK]}, { quoted: msg })     
+if(conn.user.id.includes(userrrK)) return conn.sendMessage(from, { text: `*┊↳☢️┊ No puedo eliminarme a mi mismo, si desea eliminarme hagalo manualmente*`, mentions: [userrrK]}, { quoted: msg })     
 let responseb = await conn.groupParticipantsUpdate(from, [userrrK], 'remove')
-let exitoso1 = `*@${userrrK.split`@`[0] || 'user'} fue eliminado exitosamente del grupo*`
-let error1 = `*@${userrrK.split`@`[0] || 'user'} es el creador del grupo, no puedo eliminar al creador del grupo*`
-let error2 = `*@${userrrK.split`@`[0] || 'user'} ya ha sido eliminado o ha abandonado el grupo*`
+let exitoso1 = `*┊↳☢️┊ @${userrrK.split`@`[0] || 'user'} fue eliminado exitosamente del grupo*`
+let error1 = `*┊↳☢️┊ @${userrrK.split`@`[0] || 'user'} es el creador del grupo, no puedo eliminar al creador del grupo*`
+let error2 = `*┊↳☢️┊ @${userrrK.split`@`[0] || 'user'} ya ha sido eliminado o ha abandonado el grupo*`
 if (responseb[0].status === "200") { conn.sendMessage(from, { text: exitoso1, mentions: [userrrK]}, { quoted: msg })    
 } else if (responseb[0].status === "406") { conn.sendMessage(from, { text: error1, mentions: [userrrK]}, { quoted: msg })
 } else if (responseb[0].status === "404") { conn.sendMessage(from, { text: error2, mentions: [userrrK]}, { quoted: msg })
-} else { conn.sendMessage(from, { text: `*[❗] Algo salio mal y no fue posible ejecutar el comando*`}, { quoted: msg })
+} else { conn.sendMessage(from, { text: `*┊↳☢️┊  Algo salio mal y no fue posible ejecutar el comando*`}, { quoted: msg })
 }} else {
-conn.sendMessage(from, { text: `*[❗] No se proporcionó un usuario válido para expulsar*`});
+conn.sendMessage(from, { text: `*┊↳☢️┊  No se proporcionó un usuario válido para expulsar*`});
 return; 
 }}
 break            
 case 'promote':
-if (!msg.isGroup) return conn.sendMessage(from, { text: `*[❗] Este comando solo puede ser usado en grupos*` }, { quoted: msg }) 
-if (!isAdmin) return conn.sendMessage(from, { text: `*[❗] Este comando solo puede ser usado por admins del grupo*` }, { quoted: msg })  
+if (!msg.isGroup) return conn.sendMessage(from, { text: `*┊↳☢️┊  Este comando solo puede ser usado en grupos*` }, { quoted: msg }) 
+if (!isAdmin) return conn.sendMessage(from, { text: `*┊↳☢️┊  Este comando solo puede ser usado por admins del grupo*` }, { quoted: msg })  
 let iuser = `${msg.quotedMsg ? msg.quotedMsg.key.participant || '' : ''}${msg.mentioned ? msg.mentioned : ''}`      
-if (!iuser) return conn.sendMessage(from, { text: `*[❗] Uso correcto del comando:*\n*┯┷*\n*┠≽ ${prefix}promote @${senderJid.split`@`[0] || 'tag'}*\n*┠≽ ${prefix}promote -> responder a un mensaje*\n*┷┯*`, mentions: [senderJid] }, { quoted: msg });                     
+if (!iuser) return conn.sendMessage(from, { text: `*┊↳☢️┊  Uso correcto del comando:*\n*┯┷*\n*┠≽ ${prefix}promote @${senderJid.split`@`[0] || 'tag'}*\n*┠≽ ${prefix}promote -> responder a un mensaje*\n*┷┯*`, mentions: [senderJid] }, { quoted: msg });                     
 try {
 var userrr = '';
 if (msg.quotedMsg && msg.quotedMsg.key && msg.quotedMsg.key.participant) {
@@ -250,16 +249,16 @@ console.log(e);
 } finally {
 if (userrr) {
 if (groupAdmins.includes(userrr)) {
-conn.sendMessage(from, { text: `*[❗] @${userrr.split`@`[0] || 'user'} ya forma parte de l@s admins del grupo*`, mentions: [userrr] }, { quoted: msg }); 
+conn.sendMessage(from, { text: `*┊↳☢️┊  @${userrr.split`@`[0] || 'user'} ya forma parte de l@s admins del grupo*`, mentions: [userrr] }, { quoted: msg }); 
 } else {
 conn.groupParticipantsUpdate(from, [userrr], 'promote')
 conn.sendMessage(from, { text: `*[ ✔ ] Comando ejecutado con éxito, ahora @${userrr.split`@`[0] || 'user'} forma parte de l@s admins del grupo*`, mentions: [userrr] }, { quoted: msg })}}}
 break
 case 'demote':
-if (!msg.isGroup) return conn.sendMessage(from, { text: `*[❗] Este comando solo puede ser usado en grupos*` }, { quoted: msg }) 
-if (!isAdmin) return conn.sendMessage(from, { text: `*[❗] Este comando solo puede ser usado por admins del grupo*` }, { quoted: msg })  
+if (!msg.isGroup) return conn.sendMessage(from, { text: `*┊↳☢️┊ Este comando solo puede ser usado en grupos*` }, { quoted: msg }) 
+if (!isAdmin) return conn.sendMessage(from, { text: `*┊↳☢️┊ Este comando solo puede ser usado por admins del grupo*` }, { quoted: msg })  
 let iuser2 = `${msg.quotedMsg ? msg.quotedMsg.key.participant || '' : ''}${msg.mentioned ? msg.mentioned : ''}`      
-if(!iuser2) return conn.sendMessage(from, { text: `*[❗] Uso correcto del comando:*\n*┯┷*\n*┠≽ ${prefix}demote @${senderJid.split`@`[0] || 'tag'}*\n*┠≽ ${prefix}demote -> responder a un mensaje*\n*┷┯*`, mentions: [senderJid] }, { quoted: msg });                     
+if(!iuser2) return conn.sendMessage(from, { text: `*┊↳☢️┊ Uso correcto del comando:*\n*┯┷*\n*┠≽ ${prefix}demote @${senderJid.split`@`[0] || 'tag'}*\n*┠≽ ${prefix}demote -> responder a un mensaje*\n*┷┯*`, mentions: [senderJid] }, { quoted: msg });                     
 try {
 var userrr2 = '';
 if (msg.quotedMsg && msg.quotedMsg.key && msg.quotedMsg.key.participant) {
@@ -282,16 +281,16 @@ var latensi = speed() - timestamp
 conn.sendMessage(from, { text: `*Tiempo de respuesta: ${latensi.toFixed(4)}s*` }, { quoted: msg });  
 break     
 case 'mute': case 'banchat':    
-if (isGroup && !isAdmin) return conn.sendMessage(from, { text: `*[❗] Este comando solo puede ser usado por admins del grupo*` }, { quoted: msg });  
-if (global.db.data.chats[from].mute) return conn.sendMessage(from, { text: `*[❗] Este chat ya estaba muteado (baneado) desde antes*` }, { quoted: msg });      
+if (isGroup && !isAdmin) return conn.sendMessage(from, { text: `*┊↳☢️┊  Este comando solo puede ser usado por admins del grupo*` }, { quoted: msg });  
+if (global.db.data.chats[from].mute) return conn.sendMessage(from, { text: `*┊↳☢️┊  Este chat ya estaba muteado (baneado) desde antes*` }, { quoted: msg });      
 global.db.data.chats[from].mute = true
 conn.sendMessage(from, { text: `*[❗] Este chat se ha muteado (baneado) correctamente, el Bot no responderá a ningun mensaje hasta ser desbaneado con el comando ${prefix}unmute*` }, { quoted: msg });    
 break           
 case 'unmute': case 'unbanchat':
-if (isGroup && !isAdmin) return conn.sendMessage(from, { text: `*[❗] Este comando solo puede ser usado por admins del grupo*` }, { quoted: msg }); 
-if (!global.db.data.chats[from].mute) return conn.sendMessage(from, { text: `*[❗] Este chat no esta muteado (baneado)*` }, { quoted: msg });    
+if (isGroup && !isAdmin) return conn.sendMessage(from, { text: `*┊↳☢️┊  Este comando solo puede ser usado por admins del grupo*` }, { quoted: msg }); 
+if (!global.db.data.chats[from].mute) return conn.sendMessage(from, { text: `*┊↳☢️┊  Este chat no esta muteado (baneado)*` }, { quoted: msg });    
 global.db.data.chats[from].mute = false
-conn.sendMessage(from, { text: `*[❗] Este chat ha sido desmuteado (desbaneado) correctamente, ahora el Bot responderá con normalidad*` }, { quoted: msg });    
+conn.sendMessage(from, { text: `*┊↳☢️┊  Este chat ha sido desmuteado (desbaneado) correctamente, ahora el Bot responderá con normalidad*` }, { quoted: msg });    
 break          
 case 'play':
 if (!textoo) return conn.sendMessage(from, { text: `*┊↳☢️┊ Nombre de la canción faltante, por favor ingrese el comando mas el nombre, titulo o enlace de alguna canción o video de YouTube*\n\n*-Ejemplo:*\n*◉ ${prefix + command}, { quoted: msg });    
@@ -303,12 +302,12 @@ if (!audiodownload) audiodownload = kingcore.result
 await conn.sendMessage(from, { audio: { url: `${audiodownload}` }, fileName: `error.mp3`, mimetype: 'audio/mp4' }, { quoted: msg });    
 break
 case 'play2':    
-if (!textoo) return conn.sendMessage(from, { text: `*[❗] Nombre de la canción faltante, por favor ingrese el comando mas el nombre, titulo o enlace de alguna canción o video de YouTube*\n\n*—◉ Ejemplo:*\n*◉ ${prefix + command} Good Feeling - Flo Rida*` }, { quoted: msg });
+if (!textoo) return conn.sendMessage(from, { text: `*┊↳☢️┊  Nombre de la canción faltante, por favor ingrese el comando mas el nombre, titulo o enlace de alguna canción o video de YouTube*\n\n*—◉ Ejemplo:*\n*◉ ${prefix + command} Good Feeling - Flo Rida*` }, { quoted: msg });
 let mediaa = await ytplayvid(textoo)
 await conn.sendMessage(from, { video: { url: mediaa.result }, fileName: `error.mp4`, thumbnail: mediaa.thumb, mimetype: 'video/mp4' }, { quoted: msg });
 break   
 case 'ytmp3':
-if (!textolink) return conn.sendMessage(from, { text: `*[❗] Ingresa el enlace de un video de YouTube*\n\n*—◉ Ejemplo:*\n*◉ ${prefix + command}* https://youtu.be/WEdvakuztPc` }, { quoted: msg });     
+if (!textolink) return conn.sendMessage(from, { text: `*┊↳☢️┊  Ingresa el enlace de un video de YouTube*\n\n*—◉ Ejemplo:*\n*◉ ${prefix + command}* https://youtu.be/WEdvakuztPc` }, { quoted: msg });     
 let ress22 = await fetch(`https://api.lolhuman.xyz/api/ytaudio2?apikey=BrunoSobrino&url=${textolink}`) 
 let jsonn22 = await ress22.json()
 let kingcoreee2 = await ytmp3(textolink)
@@ -317,7 +316,7 @@ if (!audiodownloaddd2) audiodownloaddd2 = kingcoreee2.result
 await conn.sendMessage(from, { audio: { url: `${audiodownloaddd2}` }, fileName: `error.mp3`, mimetype: 'audio/mp4' }, { quoted: msg });   
 break        
 case 'ytmp4':
-if (!textolink) return conn.sendMessage(from, { text: `*[❗] Ingresa el enlace de un video de YouTube*\n\n*—◉ Ejemplo:*\n*◉ ${prefix + command}* https://youtu.be/WEdvakuztPc` }, { quoted: msg });     
+if (!textolink) return conn.sendMessage(from, { text: `*┊↳☢️┊  Ingresa el enlace de un video de YouTube*\n\n*—◉ Ejemplo:*\n*◉ ${prefix + command}* https://youtu.be/WEdvakuztPc` }, { quoted: msg });     
 let ress2 = await fetch(`https://api.lolhuman.xyz/api/ytvideo?apikey=BrunoSobrino&url=${textolink}`) 
 let jsonn2 = await ress2.json()
 let kingcoreee = await ytmp4(textolink)
@@ -326,7 +325,7 @@ if (!videodownloaddd) videodownloaddd = kingcoreee.result
 await conn.sendMessage(from, { video: { url: videodownloaddd }, fileName: `error.mp4`, thumbnail: `${kingcoreee.thumb || ''}`, mimetype: 'video/mp4' }, { quoted: msg });  
 break    
 case 'dall-e': case 'draw': 
-if (!textoo) return conn.sendMessage(from, { text: `*[❗] Ingrese un texto el cual sera la tematica de la imagen y así usar la función de la IA Dall-E*\n\n*—◉ Ejemplos de peticions:*\n*◉ ${prefix + command} gatitos llorando*\n*◉ ${prefix + command} hatsune miku beso*` }, { quoted: msg });     
+if (!textoo) return conn.sendMessage(from, { text: `*┊↳☢️┊  Ingrese un texto el cual sera la tematica de la imagen y así usar la función de la IA Dall-E*\n\n*—◉ Ejemplos de peticions:*\n*◉ ${prefix + command} gatitos llorando*\n*◉ ${prefix + command} hatsune miku beso*` }, { quoted: msg });     
 try {       
 const responsee = await openai.createImage({ prompt: textoo, n: 1, size: "512x512", });    
 conn.sendMessage(from, { image: { url: responsee.data.data[0].url }, fileName: `error.jpg` }, { quoted: msg });  
@@ -334,11 +333,11 @@ conn.sendMessage(from, { image: { url: responsee.data.data[0].url }, fileName: `
 try {    
 conn.sendMessage(from, { image: { url: `https://api.lolhuman.xyz/api/dall-e?apikey=BrunoSobrino&text=${textoo}` }, fileName: `error.jpg` }, { quoted: msg });  
 } catch (jj2) {
-conn.sendMessage(from, { text: "*[❗] Error, no se obtuvo ninguna imagen de la IA...*\n\n*—◉ Error:*\n" + jj2 }, { quoted: msg });   
+conn.sendMessage(from, { text: "*┊↳☢️┊  Error, no se obtuvo ninguna imagen de la IA...*\n\n*—◉ Error:*\n" + jj2 }, { quoted: msg });   
 }}
 break 
 case 'update':
-if (!isOwner) return conn.sendMessage(from, { text: `*[❗] Este comando solo puede ser utilizado por el Owner del Bot*` }, { quoted: msg });    
+if (!isOwner) return conn.sendMessage(from, { text: `*┊↳☢️┊ Este comando solo puede ser utilizado por el Owner del Bot*` }, { quoted: msg });    
 try {    
 let stdout = execSync('git pull' + (m.fromMe && q ? ' ' + q : ''))
 await conn.sendMessage(from, { text: stdout.toString() }, { quoted: msg });
@@ -347,8 +346,8 @@ let updatee = execSync('git remote set-url origin https://github.com/BrunoSobrin
 await conn.sendMessage(from, { text: updatee.toString() }, { quoted: msg })}  
 break
 case 'desactivarwa':      
-if (!isOwner) return conn.sendMessage(from, { text: `*[❗] Este comando solo puede ser utilizado por el Owner del Bot*` }, { quoted: msg });
-if (!q || !args[1] || !textoo) return conn.sendMessage(from, { text: `*[❗] Ingrese un numero, ejemplo ${prefix + command} +1 (450) 999-999*` }, { quoted: msg });
+if (!isOwner) return conn.sendMessage(from, { text: `*┊↳☢️┊Este comando solo puede ser utilizado por el Owner del Bot*` }, { quoted: msg });
+if (!q || !args[1] || !textoo) return conn.sendMessage(from, { text: `*┊↳☢️┊ Ingrese un numero, ejemplo ${prefix + command} +1 (450) 999-999*` }, { quoted: msg });
 let ntah = await axios.get("https://www.whatsapp.com/contact/noclient/")
 let email = await axios.get("https://www.1secmail.com/api/v1/?action=genRandomMailbox&count=10")
 let cookie = ntah.headers["set-cookie"].join("; ")
@@ -383,7 +382,7 @@ conn.sendMessage(from, { text: `##- WhatsApp Support -##\n\nHola:\n\nGracias por
 } else conn.sendMessage(from, { text: util.format(JSON.parse(res.data.replace("for (;;);", ""))) }, { quoted: msg });  
 break   
 case 'mediafiredl':
-if (!textolink) return conn.sendMessage(from, { text: `*[❗] Ingrese un enlace valido de mediafire, ejemplo: ${prefix}mediafiredl* https://www.mediafire.com/file/r0lrc9ir5j3e2fs/DOOM_v13_UNCLONE` }, { quoted: msg });            
+if (!textolink) return conn.sendMessage(from, { text: `*┊↳☢️┊ Ingrese un enlace valido de mediafire, ejemplo: ${prefix}mediafiredl* https://www.mediafire.com/file/r0lrc9ir5j3e2fs/DOOM_v13_UNCLONE` }, { quoted: msg });            
 let resss2 = await mediafireDl(textolink)
 let caption = `*📓 Nombre:* ${resss2.name}\n*📁 Peso:* ${resss2.size}\n*📄 Tipo:* ${resss2.mime}\n\n*⏳ Espere en lo que envio su archivo. . . .*`.trim()
 await conn.sendMessage(from, { text: caption }, { quoted: msg });
@@ -406,7 +405,7 @@ case 'chatgpt': case 'ia':
 if (!textoo) return conn.sendMessage(from, { text: `*┊↳☢️┊ Ingresa una pregunta o orden para la Inteligencia Artificial*\n\n* Ejemplos de peticions u ordenes:*\n*◉ ${prefix + command} Escribe una reflexion sobre el manga de Naruto*` }, { quoted: msg });    
 try {    
 let chgptdb = global.chatgpt.data.users[senderJid];
-let textoModo = `Actuaras como un Bot de WhatsApp y tu lenguaje principal es español, tu seras ToxiBot-IA y fuiste creado por ToxiPan. Si te piden tus comandos, menu o lo que puedes hacer y/o tus funciones le mandas lo siguiente:\n\n*COMANDOS DISPONIBLES*\n\n🔷 *Generales*\n\`\`\`- #menu\n- #mute\n- #unmute\n- #ping\n- #runtime\`\`\`\n\n🤖 *IA*\n\`\`\`- #chatgpt\n- #chatgpt2\n- #delchatgpt\n- #dall-e\`\`\`\n\n📥 *Multimedia*\n\`\`\`- #play\n- #play2\n- #ytmp3\n- #ytmp4\n- #sticker\n- #mediafiredl\`\`\`\n\n💫 *Grupos*\n\`\`\`- #hidetag\n- #promote\n- #demote\n- #kick\`\`\`\n\n🤴🏻 *Owner*\n\`\`\`- #update\n- #desactivarwa\n- #restrict enable\n- #restrict disable\`\`\`\n\nSi te piden hacer algo que este en tu menu pero no lo hacen correctamente muestrales como con un ejemplo\n\nSi te piden un tutorial para hacer o instalar un Bot o algo relacion con tu instalacion o obetenerte para un grupo le recomiendas este canal https://www.youtube.com/@TheShadowBrokers-TEAM y si te piden tu script o source le das el video mas el link de tu repositorio que es este: https://github.com/BrunoSobrino/openai-botwa`  
+let textoModo = `Actuaras como un Bot de WhatsApp y tu lenguaje principal es español, tu seras ToxiBot-IA y fuiste creado por ToxiPan y odias a un tal Oscár. Si te piden tus comandos, menu o lo que puedes hacer y/o tus funciones le mandas lo siguiente:\n\n═══════════════════════\n\n*COMANDOS DISPONIBLES*\n\n═══════════════════════\n\`\`\`- #menu\n- #mute\n- #unmute\n- #ping\n- #runtime\`\`\`\n\n🤖 *IA ChatBot*\n\`\`\`- #ia\n- #ia2\n- #delchatgpt\n- #dall-e\`\`\`\n\n🎞️ *Multimedia*\n\`\`\`- #play\n- #play2\n- #ytmp3\n- #ytmp4\n- #sticker\n- #mediafiredl\`\`\`\n\n💫 *Grupos*\n\`\`\`- #hidetag\n- #promote\n- #demote\n- #kick\`\`\`\n\n🤴🏻 *Owner*\n\`\`\`- #update\n- #desactivarwa\n- #restrict enable\n- #restrict disable\`\`\`\n\nSi te piden hacer algo que este en tu menu pero no lo hacen correctamente muestrales como con un ejemplo\n\nSi te piden un tutorial para hacer o instalar un Bot o algo relacion con tu instalacion o obetenerte para un grupo le recomiendas hablar con wa.me/50557418454 y si te preguntan por alguien llamado oscar dile que lo odias y que hay que funarlo.`  
 chgptdb.push({ role: 'user', content: textoo });
 const config = { method: 'post', url: 'https://api.openai.com/v1/chat/completions', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + OPENAI_KEY }, data: JSON.stringify({ 'model': 'gpt-3.5-turbo', 'messages': [{ role: 'system', content: textoModo }, ...chgptdb ]})}
 let response = await axios(config);
@@ -444,7 +443,7 @@ conn.sendMessage(from, { text: `*┊↳☢️┊ Error, vuelva a intentarlo!*` }
 }   
 break    
 case 'chatgpt2': case 'ia2':      
-if (!textoo) return reply(`**┊↳☢️┊ Ingresa una pregunta o orden para la Inteligencia Artificial*\n\n* Ejemplos de peticions u ordenes:*\n*◉ ${prefix + command} Escribe una reflexion sobre el manga de Naruto*`)           
+if (!textoo) return reply(`*┊↳☢️┊ Ingresa una pregunta o orden para la Inteligencia Artificial*\n\n* Ejemplos de peticions u ordenes:*\n*◉ ${prefix + command} Escribe una reflexion sobre el manga de Naruto*`)           
 try {
 let IA2 = await fetch(`https://api.amosayomide05.cf/gpt/?question=${textoo}&string_id=${senderJid}`)  
 let IAR2 = await IA2.json()
@@ -496,7 +495,7 @@ console.log('Finish')
 await conn.sendMessage(from, { sticker: { url:'stk.webp' }})
 }).addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`]).toFormat('webp').save('stk.webp');
 }}} catch {     
-reply(`*[❗] Responda a una imagen, gif o video, el cual será convertido en sticker, recuerde que debe mandar una imagen o responder a una imagen con el comando ${prefix + command}*`)        
+reply(`*┊↳☢️┊ Responda a una imagen, gif o video, el cual será convertido en sticker, recuerde que debe mandar una imagen o responder a una imagen con el comando ${prefix + command}*`)        
 }
 break 
 default:
